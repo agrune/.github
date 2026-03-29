@@ -6,10 +6,10 @@
 
 **Browser automation for AI agents via annotated DOM elements**
 
-[![npm version](https://img.shields.io/npm/v/@agrune/core?label=%40agrune%2Fcore&color=cb3837)](https://www.npmjs.com/package/@agrune/core)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gchelkphnedibjihiomlbpjhjlajplke?label=Chrome%20Web%20Store&color=4285F4)](https://chromewebstore.google.com/detail/agrune/gchelkphnedibjihiomlbpjhjlajplke)
-[![npm downloads](https://img.shields.io/npm/dm/@agrune/core?color=cb3837)](https://www.npmjs.com/package/@agrune/core)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/agrune/agrune/blob/main/LICENSE)
+[![Version](https://img.shields.io/npm/v/@agrune/core?style=flat-square&label=version&color=cb3837)](https://www.npmjs.com/package/@agrune/core)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gchelkphnedibjihiomlbpjhjlajplke?style=flat-square&label=chrome%20web%20store&color=4285F4)](https://chromewebstore.google.com/detail/agrune/gchelkphnedibjihiomlbpjhjlajplke)
+[![Downloads](https://img.shields.io/npm/dm/@agrune/core?style=flat-square&label=downloads&color=cb3837)](https://www.npmjs.com/package/@agrune/core)
+[![License](https://img.shields.io/github/license/agrune/agrune?style=flat-square&color=yellow)](https://github.com/agrune/agrune/blob/main/LICENSE)
 
 </div>
 
@@ -41,8 +41,6 @@ Everything runs **100% locally**. No cloud. No data leaves your machine.
 
 > All use cases are under active development.
 
-## Key Features
-
 <!-- ============================================================
      ANNOTATION GIF
      Shooting guide: Split-view recording — left side shows HTML
@@ -55,24 +53,27 @@ Everything runs **100% locally**. No cloud. No data leaves your machine.
 <img src="https://placehold.co/800x400/1a1a2e/8b949e?text=Annotation+%E2%86%92+Control+Split+View+%E2%80%94+Coming+Soon" alt="Annotation to control split view" width="800" />
 </div>
 
+## Key Features
+
+| | | |
+|:---:|:---:|:---:|
 | :dart: **9 MCP Tools** | :lock: **100% Local** | :sparkles: **Visual Feedback** |
-|---|---|---|
-| Click, fill, drag, read, and more — one tool per action | All data stays on your machine, no cloud calls | Animated Aurora cursor shows exactly what AI is doing |
+| Click, fill, drag, wait, read — full browser control through a standard protocol | Zero cloud dependency. All data stays on your machine | Aurora pointer animation shows exactly what the AI is doing in real time |
 | :label: **Simple Annotations** | :robot: **Agent Agnostic** | :clipboard: **Smart Page Reading** |
-| Just add `data-agrune-*` attributes to your HTML | Works with any MCP-compatible AI agent | AI reads semantic page structure, not raw DOM soup |
+| Just add `data-agrune-*` attributes to your HTML. No SDK, no wrapper | Works with Claude, GPT, Gemini — any AI that speaks MCP | Extract visible page content as structured Markdown for AI context |
 
 ## Why agrune?
 
 | | agrune | Playwright | BrowserUse | Chrome DevTools |
-|---|---|---|---|---|
-| **AI-native MCP** | :white_check_mark: | :x: | :warning: | :x: |
-| **Visual feedback** | :white_check_mark: | :x: | :x: | :x: |
-| **Semantic targeting** | :white_check_mark: | :x: | :warning: | :x: |
-| **Real browser** | :white_check_mark: | :warning: | :white_check_mark: | :white_check_mark: |
-| **Zero cloud** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: |
-| **Setup complexity** | :white_check_mark: One command | :warning: Config needed | :warning: Config needed | :x: Manual |
+|---|:---:|:---:|:---:|:---:|
+| **AI-native (MCP)** | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| **Visual feedback** | :white_check_mark: Aurora cursor | :x: | :warning: Highlight only | :x: |
+| **Semantic targeting** | :white_check_mark: Named annotations | CSS / XPath | Vision-based | CSS / XPath |
+| **Real browser** | :white_check_mark: | Headless default | :white_check_mark: | :white_check_mark: |
+| **Zero cloud** | :white_check_mark: 100% local | :white_check_mark: | :x: Cloud API | :white_check_mark: |
+| **Setup** | 1 command | Config + scripts | API key + config | Manual protocol |
 
-> :bulb: **Semantic annotations are the key differentiator.** Instead of fragile CSS selectors or XPaths, agrune targets elements by their meaning — making automations resilient to UI changes.
+> **The key difference:** Other tools target elements by CSS selectors or screenshots. agrune uses **semantic annotations** — the AI knows *what* a button does, not just where it is. No brittle selectors, no vision model costs, and interactions that survive UI redesigns.
 
 ## Architecture
 
