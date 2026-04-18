@@ -1,14 +1,15 @@
 <div align="center">
 
-<img src="https://github.com/agrune/agrune/raw/main/packages/extension/icon-128.png" width="80" height="80" alt="agrune logo" />
+<img src="https://github.com/agrune/agrune/raw/main/packages/devtools/icon-128.png" width="80" height="80" alt="agrune logo" />
 
 # agrune
 
-**Browser automation for AI agents via annotated DOM elements**
+**Browser automation for AI agents — CDP-native, 100% local, works with any MCP harness**
 
-[![Version](https://img.shields.io/npm/v/@agrune/core?style=flat-square&label=version&color=cb3837)](https://www.npmjs.com/package/@agrune/core)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gchelkphnedibjihiomlbpjhjlajplke?style=flat-square&label=chrome%20web%20store&color=4285F4)](https://chromewebstore.google.com/detail/agrune/gchelkphnedibjihiomlbpjhjlajplke)
-[![Downloads](https://img.shields.io/npm/dm/@agrune/core?style=flat-square&label=downloads&color=cb3837)](https://www.npmjs.com/package/@agrune/core)
+<!-- TODO 2026-04-18: Chrome Web Store 배지는 v1.1 CDP-only 피봇 이후 더 이상 canonical 배포 채널이 아닙니다. 재설치/링크 삭제 판단은 org maintainer 수동 결정. -->
+[![Version](https://img.shields.io/npm/v/@agrune/mcp?style=flat-square&label=version&color=cb3837)](https://www.npmjs.com/package/@agrune/mcp)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gchelkphnedibjihiomlbpjhjlajplke?style=flat-square&label=chrome%20web%20store&color=4285F4)](https://chromewebstore.google.com/detail/agrune/gchelkphnedibjihiomlbpjhjlajplke) <!-- deprecated -->
+[![Downloads](https://img.shields.io/npm/dm/@agrune/mcp?style=flat-square&label=downloads&color=cb3837)](https://www.npmjs.com/package/@agrune/mcp)
 [![License](https://img.shields.io/github/license/agrune/agrune?style=flat-square&color=yellow)](https://github.com/agrune/agrune/blob/main/LICENSE)
 
 </div>
@@ -27,7 +28,7 @@
 
 ## What is agrune?
 
-**agrune** lets AI agents see and control web pages — directly in the browser. Add simple HTML annotations to your UI, connect any MCP-compatible AI agent, and watch it interact with your app in real time with smooth animated cursor feedback.
+**agrune** lets AI agents see and control web pages — directly in a real Chrome browser, over CDP. Add simple `data-agrune-*` annotations to your UI, run `@agrune/mcp`, and watch your MCP-compatible agent (Claude, GPT, Gemini, …) interact with the page with live command logs and a smooth Aurora pointer.
 
 Everything runs **100% locally**. No cloud. No data leaves your machine.
 
@@ -57,10 +58,10 @@ Everything runs **100% locally**. No cloud. No data leaves your machine.
 
 | | | |
 |:---:|:---:|:---:|
-| :dart: **9 MCP Tools** | :lock: **100% Local** | :sparkles: **Visual Feedback** |
-| Click, fill, drag, wait, read — full browser control through a standard protocol | Zero cloud dependency. All data stays on your machine | Aurora pointer animation shows exactly what the AI is doing in real time |
-| :label: **Simple Annotations** | :robot: **Agent Agnostic** | :clipboard: **Smart Page Reading** |
-| Just add `data-agrune-*` attributes to your HTML. No SDK, no wrapper | Works with Claude, GPT, Gemini — any AI that speaks MCP | Extract visible page content as structured Markdown for AI context |
+| :dart: **10 MCP Tools** | :lock: **100% Local** | :sparkles: **Live DevTools Webapp** |
+| Click, fill, drag, wait, read, focus — full browser control via MCP | Zero cloud. CDP straight to your own Chrome | Command log, HITL toolbar, session routing, failure diagnostics at http://localhost:47654/devtools |
+| :label: **Simple Annotations** | :robot: **Agent Agnostic** | :zap: **Self-Healing Sessions** |
+| Just add `data-agrune-*` attributes to your HTML. No SDK | Works with Claude, GPT, Gemini — any MCP-speaking agent | Auto-reattach on tab crashes, supervisor-driven recovery, `recovered` flag on tool responses |
 
 ## Why agrune?
 
@@ -78,45 +79,36 @@ Everything runs **100% locally**. No cloud. No data leaves your machine.
 ## Architecture
 
 ```
-┌──────────┐     ┌────────────┐     ┌──────────────────┐     ┌──────────┐
-│ AI Agent │◄───►│ MCP Server │◄───►│ Chrome Extension │◄───►│ Web Page │
-└──────────┘     └────────────┘     └──────────────────┘     └──────────┘
-                  Native Messaging    Manifest V3              data-agrune-*
+┌──────────┐     ┌──────────────────────┐     ┌────────┐     ┌──────────┐
+│ AI Agent │◄───►│ @agrune/mcp (stdio)  │◄───►│ Chrome │◄───►│ Web Page │
+└──────────┘     └──────────────────────┘     └────────┘     └──────────┘
+                  + DevTools webapp :47654     CDP            data-agrune-*
 ```
 
 ## Quick Start
 
-**1. Install the plugin**
+**1. Install the MCP server**
 
 ```sh
-claude plugin install agrune@agrune
+npm install -g @agrune/mcp
 ```
 
-**2. Run the setup command**
+**2. Launch agrune**
 
 ```sh
-/agrune:start
+agrune                     # Chrome launch + DevTools webapp on :47654
+agrune --attach ws://...   # attach to an existing Chrome (--remote-debugging-port)
+agrune --help              # full flag reference
 ```
 
-AI auto-annotates your project, installs the Chrome extension, and verifies the connection.
+**3. Connect your MCP-compatible agent** to the stdio server and start interacting.
 
-<!-- ============================================================
-     SETUP GIF
-     Shooting guide: Terminal recording of the full setup flow —
-     plugin install, /agrune:start output, extension connecting.
-     ~800px wide, 10-15 second loop. Replace placeholder below.
-     ============================================================ -->
-
-<div align="center">
-<img src="https://placehold.co/800x400/1a1a2e/8b949e?text=Setup+Flow+%E2%80%94+Coming+Soon" alt="agrune setup terminal recording" width="800" />
-</div>
-
-**3. Done.** Start automating.
+See the monorepo [README](https://github.com/agrune/agrune#readme) for annotation examples, DevTools webapp features, and automation profile setup.
 
 ---
 
 <div align="center">
 
-[Documentation](https://github.com/agrune/agrune) · [Chrome Web Store](https://chromewebstore.google.com/detail/agrune/gchelkphnedibjihiomlbpjhjlajplke) · [npm](https://www.npmjs.com/org/agrune) · [Contributing](https://github.com/agrune/agrune/blob/main/CONTRIBUTING.md)
+[Documentation](https://github.com/agrune/agrune) · [Chrome Web Store](https://chromewebstore.google.com/detail/agrune/gchelkphnedibjihiomlbpjhjlajplke) <!-- deprecated --> · [npm](https://www.npmjs.com/org/agrune) · [Contributing](https://github.com/agrune/agrune/blob/main/CONTRIBUTING.md)
 
 </div>
